@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  time-bot:
+    build: .
+    container_name: time-tracking-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      # Монтируем файл credentials внутрь контейнера
+      - ./credentials.json:/app/credentials.json:ro
+    environment:
+      - GOOGLE_CREDENTIALS_JSON_PATH=/app/credentials.json
